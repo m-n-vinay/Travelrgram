@@ -1,0 +1,84 @@
+<div class="main row mt-5 mb-3">
+    <div class="col-sm-9 col-md-9 col-lg-6">
+      <div class="card border-dark">
+        <div class="card-header bg-secondary text-large text-white text-center">
+          {{ "Add Your awesome Post" | uppercase }}
+        </div>
+  
+        <form class="card-body" (ngSubmit)="onSubmit()">
+          <div class="form-group mb-3">
+            <label for="locationName" class="form-label">Location Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="locationName"
+              name="locationName"
+              placeholder="Enter Name"
+              [(ngModel)]="locationName"
+              required
+            />
+          </div>
+  
+          <div class="form-group mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea
+              type="text"
+              rows="5"
+              class="form-control"
+              id="description"
+              name="description"
+              [(ngModel)]="description"
+              required
+              placeholder="Some Description"
+            ></textarea>
+          </div>
+  
+          <div class="form-group mb-3 mt-2">
+            <label for="imagepicker" class="form-label">
+              Add your awesome photo
+            </label>
+  
+            <input
+              type="file"
+              name="image"
+              id="imagepicker"
+              accept="image/*"
+              multiple="{false}"
+              (change)="uploadFile($event)"
+
+              class="form-control-file form-control"
+            />
+            <div
+              class="text-info text-center"
+              [hidden]="!uploadPercent || uploadPercent == 100"
+            >
+              uploading {{ uploadPercent | number: "1.0-0" }} % of 100% <br />
+              Please wait a little...
+            </div>
+            <div
+              class="text-success text-uppercase text-center"
+              *ngIf="uploadPercent == 100"
+            >
+              Upload finished
+            </div>
+          </div>
+  
+          <div class="text-center row">
+            <a type="button" class="col btn btn-secondary m-2" [routerLink]="['/']">
+              Back
+            </a>
+            <button type="submit" class="col btn btn-primary m-2" [disabled]="!picture">
+              Submit Post
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="col-sm-3 col-md-3 col-lg-6">
+      <h3 *ngIf="picture" class="text-success text-center text-uppercase">
+        Your Image
+      </h3>
+      <img *ngIf="picture" [src]="picture" alt="" class="img-fluid" />
+    </div>
+  </div>
+  

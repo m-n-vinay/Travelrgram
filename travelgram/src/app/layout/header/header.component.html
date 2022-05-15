@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary ml-2 mr-2">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold" [routerLink]="['/']">
+      <img src="../../../assets/logo.png" width="40" height="40" class="d-inline-block align-top" alt="" />
+      <span class="">Travelgram</span>
+    </a>
+    <button class="navbar-toggler" type="button" (click)="toggleNavbarCollapsing()" >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse d-sm-inline-flex justify-content-between" [class.collapse]="navbarCollapsed" id="navbarNavAltMarkup">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a *ngIf="email" [routerLink]="['/addpost']" class="nav-item nav-link btn btn-warning text-primary">
+            Post Your Story</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <!-- if the user is present then printing email -->
+          <div *ngIf="email" class="navbar-text float-left">
+            {{ email }}
+          </div>
+        </li>
+        <li class="nav-item">
+          <a *ngIf="!email" routerLinkActive="active" [routerLink]="['/signin']" class="nav-item nav-link navbar-text">Sign In</a>
+        </li>
+        <li class="nav-item">
+          <a *ngIf="!email" routerLinkActive="active" [routerLink]="['/signup']" class="nav-item nav-link navbar-text">Sign Up</a>
+        </li>
+        <li class="nav-item">
+          <a *ngIf="email" (click)="handleSignOut()" class="nav-item nav-link navbar-text text-warning" style="cursor: pointer;">Log Out</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
